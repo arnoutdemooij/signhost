@@ -36,7 +36,7 @@ module SignHost
       RestClient.put(start_transaction_url(transaction_id), nil, auth_headers) { |response, request, result, &block|
         case response.code
         when 200, 201, 204
-          response.body
+          true
         else
           response.return!(request, result, &block)
         end
