@@ -33,10 +33,10 @@ module SignHost
     end
 
     def start_transaction(transaction_id)
-      RestClient.put(start_transaction_url(transaction_id), nil, auth_headers.merge(content_type: 'application/json', accept: 'application/json')) { |response, request, result, &block|
+      RestClient.put(start_transaction_url(transaction_id), nil, auth_headers) { |response, request, result, &block|
         case response.code
         when 200, 201, 204
-          JSON.parse(response.body)
+          response.body
         else
           response.return!(request, result, &block)
         end
