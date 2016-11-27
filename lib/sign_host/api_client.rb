@@ -33,7 +33,7 @@ module SignHost
     def transaction_upload_file(transaction_id, file_id, file, sh_display_name=nil)
       headers = auth_headers.merge(multipart: true, content_type: 'application/pdf')
       headers.merge!('SH-DisplayName' => sh_display_name) if sh_display_name.present?
-      RestClient.put(transaction_upload_file(transaction_id, file_id), file, headers) { |response, request, result, &block |
+      RestClient.put(transaction_upload_file_url(transaction_id, file_id), file, headers) { |response, request, result, &block |
         case response.code
         when 200, 201, 204
           true
