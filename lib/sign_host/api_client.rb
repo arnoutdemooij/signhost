@@ -66,14 +66,14 @@ module SignHost
     end
 
     def delete_transaction(transaction_id)
-      RestClient.delete(transaction_url(transaction_id), auth_headers.merge(content_type: 'application/json', accept: 'application/json')) do |response, request, result, &block |
+      RestClient.delete(transaction_url(transaction_id), auth_headers.merge(content_type: 'application/json', accept: 'application/json')) { |response, request, result, &block |
         case response.code
         when 200
           JSON.parse(response.body)
         else
           response.return!(request, result, &block)
         end
-      end
+      }
     end
 
     def get_signed_document(file_id, file_options={})
