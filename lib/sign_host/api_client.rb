@@ -46,7 +46,7 @@ module SignHost
     def transaction_add_file_meta_data(transaction_id, file_id, meta_data)
       RestClient.put(transaction_upload_file_url(transaction_id, file_id), meta_data.to_json, auth_headers.merge(content_type: 'application/json', accept: 'application/json')) { |response, request, result, &block |
         case response.code
-        when 200, 201, 204
+        when 200, 201, 202, 204
           true
         else
           response.return!(request, result, &block)
