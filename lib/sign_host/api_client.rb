@@ -66,7 +66,7 @@ module SignHost
     end
 
     def get_transaction(transaction_id)
-      RestClient.get(transaction_url(transaction_id), auth_headers.merge(content_type: 'application/json', accept: 'application/json')) { |response, request, result, &block |
+      RestClient.get(transaction_url(transaction_id), auth_headers.merge(accept: 'application/json')) { |response, request, result, &block |
         case response.code
         when 200
           JSON.parse(response.body)
